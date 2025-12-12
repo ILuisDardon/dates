@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Hacemos algo especial?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Pacifico&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- VARIABLES DE COLOR (Puedes cambiarlos aquí) --- */
+        :root {
+            --color-bg-1: #ffafbd;
+            --color-bg-2: #ffc3a0;
+            --color-text: #4a4a4a;
+            --color-accent: #e11d48; /* Color rojizo moderno */
+            --glass-bg: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.5);
+        }
+
+        /* --- ESTILOS GENERALES --- */
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden; /* Evita scroll si no es necesario */
+        }
+
+        /* Fondo animado con gradientes */
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--color-bg-1), var(--color-bg-2));
+            z-index: -1;
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Contenedor principal centrado */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        /* Tarjeta con efecto Glassmorphism (Vidrio) */
+        .card {
+            background: var(--glass-bg);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            text-align: center;
+            padding: 40px;
+            max-width: 450px;
+            width: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .photo-frame {
+            width: 300px;
+            height: 250px;
+            margin: 0 auto 20px;
+            border-radius: 20%;
+            overflow: hidden;
+            border: 4px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive; 
+            color: var(--color-accent);
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.6);
+        }
+
+        p.description {
+            color: var(--color-text);
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .details {
+            background: rgba(255, 255, 255, 0.4);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .details span {
+            display: block;
+            margin: 5px 0;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative; 
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn-yes {
+            background-color: var(--color-accent);
+            color: white;
+        }
+
+        .btn-yes:hover {
+            background-color: #be123c;
+            transform: scale(1.05);
+        }
+
+        .btn-no {
+            background-color: white;
+            color: var(--color-text);
+            position: relative; 
+        }
+
+        #success-message {
+            display: none;
+            margin-top: 20px;
+            color: var(--color-accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+            animation: popIn 0.5s ease;
+        }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="background"></div>
+
+    <div class="container">
+        <div class="card">
+            <div class="photo-frame">
+                <img id="main-image" src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Nosotros">
+            </div>
+
+            <h1 id="title">¿Me concedes una cita?</h1>
+            
+            <p class="description" id="description">
+                Tengo muchas ganas de verte y pasar un rato increíble contigo. He planeado algo especial...
+            </p>
+
+            <div class="details">
+                <span id="date">📅 Fecha: Este Sábado</span>
+                <span id="time">⏰ Hora: 8:00 PM</span>
+                <span id="location">📍 Lugar: Sorpresa (o pon el lugar aquí)</span>
+            </div>
+
+            <div class="buttons">
+                <button class="btn btn-yes" onclick="acepta()">¡Sí, vamos!</button>
+                <button class="btn btn-no" id="btn-no" onmouseover="mueveBoton()">No puedo</button>
+            </div>
+
+            <div id="success-message">
+                ¡Sabía que dirías que sí! ❤️ Te veo ahí.
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        
+        const configuracion = {
+            imagen: "assets/cadaver.png", 
+            titulo: "¿Saldrías conmigo?",
+            descripcion: "Me encantaría invitarte al cine y después a cenar.",
+            fecha: "📅 Sábado 13 de Diciembre",
+            hora: "⏰ 3:00 PM",
+            lugar: "📍 Plaza Galerías"
+        };
+
+        function cargarDatos() {
+            document.getElementById('main-image').src = configuracion.imagen;
+            document.getElementById('title').innerText = configuracion.titulo;
+            document.getElementById('description').innerText = configuracion.descripcion;
+            document.getElementById('date').innerText = configuracion.fecha;
+            document.getElementById('time').innerText = configuracion.hora;
+            document.getElementById('location').innerText = configuracion.lugar;
+        }
+
+        cargarDatos();
+
+        function mueveBoton() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+
+            const newWidth = Math.random() * (width - 100);
+            const newHeight = Math.random() * (height - 100);
+
+            const btnNo = document.getElementById('btn-no');
+            btnNo.style.position = "fixed";
+            btnNo.style.left = newWidth + "px";
+            btnNo.style.top = newHeight + "px";
+        }
+
+        function acepta() {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#e11d48', '#ffafbd', '#ffffff']
+            });
+
+            document.querySelector('.buttons').style.display = 'none';
+            document.getElementById('success-message').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
