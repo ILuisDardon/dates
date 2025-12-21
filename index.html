@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Pacifico&display=swap" rel="stylesheet">
     
     <style>
-        /* --- VARIABLES DE COLOR (Puedes cambiarlos aquí) --- */
         :root {
             --color-bg-1: #ffafbd;
             --color-bg-2: #ffc3a0;
@@ -17,15 +16,13 @@
             --glass-border: rgba(255, 255, 255, 0.5);
         }
 
-        /* --- ESTILOS GENERALES --- */
         body, html {
             height: 100%;
             margin: 0;
             font-family: 'Montserrat', sans-serif;
-            overflow: hidden; /* Evita scroll si no es necesario */
+            overflow: hidden; 
         }
 
-        /* Fondo animado con gradientes */
         .background {
             position: absolute;
             top: 0;
@@ -44,7 +41,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Contenedor principal centrado */
         .container {
             display: flex;
             justify-content: center;
@@ -53,7 +49,6 @@
             padding: 20px;
         }
 
-        /* Tarjeta con efecto Glassmorphism (Vidrio) */
         .card {
             background: var(--glass-bg);
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
@@ -206,11 +201,11 @@
     <script>
         
         const configuracion = {
-            imagen: "assets/cadaver.png", 
+            imagen: "assets/avatar.jpeg", 
             titulo: "¿Saldrías conmigo?",
-            descripcion: "Me encantaría invitarte al cine y después a cenar.",
-            fecha: "📅 Sábado 13 de Diciembre",
-            hora: "⏰ 3:00 PM",
+            descripcion: "Me encantaría invitarte al cine a ver Avatar.",
+            fecha: "📅 Domingo 21 de Diciembre",
+            hora: "⏰ 6:00 PM",
             lugar: "📍 Plaza Galerías"
         };
 
